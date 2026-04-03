@@ -290,7 +290,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     private buildCountdownLabel(): string {
         const now = new Date();
-        const target = this.getNextMondayAtNight(now);
+        const target = this.getNextSundayAtNight(now);
         const diff = target.getTime() - now.getTime();
 
         if (diff <= 0) {
@@ -308,18 +308,20 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         return `This page disappears in: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
     }
 
-    private getNextMondayAtNight(from: Date): Date {
-        const monday = new Date(from);
-        const daysUntilMonday = (1 - from.getDay() + 7) % 7;
-        if (daysUntilMonday === 0 && from.getHours() >= 23) {
-            monday.setDate(from.getDate() + 7);
-        } else if (daysUntilMonday === 0) {
-            // It's Monday but before 23:59, so keep it today
-        } else {
-            monday.setDate(from.getDate() + daysUntilMonday);
-        }
-        monday.setHours(23, 59, 0, 0);
-        return monday;
+private getNextSundayAtNight(from: Date): Date {
+    const sunday = new Date(from);
+    sunday.setHours(23, 59, 0, 0);
+    const day = from.getDay();
+    const sundayIndex = 0;
+    const daysUntilSunday = (sundayIndex - day + 7) % 7;
+
+    sunday.setDate(from.getDate() + daysUntilSunday);
+
+    if (daysUntilSunday === 0 && from.getTime() > sunday.getTime()) {
+      sunday.setDate(sunday.getDate() + 7);
+    }
+
+    return sunday;
     }
 
     private createParticles(count: number): FloatingParticle[] {

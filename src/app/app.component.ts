@@ -136,7 +136,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         },
         {
             date: 'January to March 2026',
-            body: "The more I saw you, the more I found you beautiful. Not just how you look — but how I feel in those moments. You are the first person after seeing whom I feel at ease. Genuinely at ease. The first person after seeing whom I want to be better — more disciplined, stronger, more present. There were silences. There were gaps. There were moments of real pain — the kind I hadn't felt before. The first time in my life I felt a fear of losing someone. I saw you on Gudi Padwa. Still found you beautiful, in whatever you were wearing that day. And I felt better again. That told me something."
+            body: "The more I saw you, the more I found you beautiful. Not just how you look — but how I feel in those moments. You are the first person after seeing whom I feel at ease. Genuinely at ease. The first person after seeing whom I want to be better — more disciplined, stronger, more present, the person I would like to keep and protect. There were silences. There were gaps. There were moments of real pain — the kind I hadn't felt before. The first time in my life I felt a fear of losing someone. I saw you on Gudi Padwa. Still found you beautiful, in whatever you were wearing that day. And I felt better again. That told me something."
         }
     ];
 

@@ -1,0 +1,173 @@
+<main class="relative isolate min-h-screen overflow-hidden px-5 pb-10 pt-6 sm:px-8 md:px-12" *ngIf="!pageExpired">
+  <div class="pointer-events-none absolute inset-0 -z-10">
+    <span
+      *ngFor="let particle of particles; let i = index"
+      class="particle"
+      [class.heart-shape]="i % 5 === 0"
+      [style.left.%]="particle.left"
+      [style.width.px]="particle.size"
+      [style.height.px]="particle.size"
+      [style.animation-duration.s]="particle.duration"
+      [style.animation-delay.s]="particle.delay"
+    ></span>
+  </div>
+
+  <div class="page-emoji-layer" aria-hidden="true">
+    <span
+      *ngFor="let emoji of floatingEmojis"
+      class="floating-emoji"
+      [style.left.%]="emoji.left"
+      [style.font-size.px]="emoji.size"
+      [style.animation-duration.s]="emoji.duration"
+      [style.animation-delay.s]="emoji.delay"
+      [style.--drift]="emoji.drift + 'px'"
+      [style.opacity]="emoji.opacity"
+      [style.--emoji-opacity]="emoji.opacity"
+    >
+      {{ emoji.symbol }}
+    </span>
+  </div>
+
+  <section class="hero flex min-h-screen flex-col items-center justify-center text-center">
+    <h1
+      class="hero-title font-heading text-5xl italic text-warmWhite sm:text-6xl md:text-7xl"
+      [@fadeInUp]="heroReady ? { value: 'visible', params: { duration: '1000ms', delay: '0ms' } } : 'hidden'"
+    >
+      For Pooja
+    </h1>
+
+    <p
+      class="mt-8 max-w-4xl px-2 font-body text-base text-mutedRose sm:text-lg"
+      [@fadeInUp]="heroReady ? { value: 'visible', params: { duration: '1000ms', delay: '300ms' } } : 'hidden'"
+    >
+      {{ countdownLabel }}
+    </p>
+
+    <div
+      class="draw-line mt-10"
+      [@fadeInUp]="heroReady ? { value: 'visible', params: { duration: '900ms', delay: '600ms' } } : 'hidden'"
+    ></div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl py-16 sm:py-24">
+    <h2 class="font-heading text-4xl italic text-warmWhite sm:text-5xl">How It Started</h2>
+
+    <div class="timeline-wrapper relative mt-14">
+      <span class="timeline-line"></span>
+
+      <article
+        *ngFor="let entry of timelineEntries; let i = index"
+        #timelineCard
+        class="timeline-row relative mb-10 pl-10 sm:pl-12 md:mb-14 md:pl-0"
+      >
+        <span class="timeline-dot"></span>
+
+        <div
+          class="timeline-card"
+          [@slideIn]="timelineVisible[i] ? 'visible' : { value: 'hidden', params: { offset: i % 2 === 0 ? -70 : 70 } }"
+          [class.md:ml-auto]="i % 2 !== 0"
+          [class.md:mr-auto]="i % 2 === 0"
+        >
+          <p class="font-mono text-sm tracking-wide text-blush">{{ entry.date }}</p>
+          <p class="mt-4 text-base leading-8 text-warmWhite/95">
+            {{ entry.body }}
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl py-14 sm:py-20">
+    <h2 class="font-heading text-4xl italic text-warmWhite sm:text-6xl">
+      What I Actually Want To Say
+    </h2>
+
+    <div class="confession-card mt-10 rounded-3xl p-6 sm:p-10 md:p-12">
+      <div class="confession-content">
+        <p
+          *ngFor="let paragraph of confessionParagraphs; let i = index"
+          #confessionParagraph
+          class="mb-8 text-base leading-[1.9] text-warmWhite/95 last:mb-0 sm:text-lg"
+          [@fadeSequential]="confessionVisible[i] ? { value: 'visible', params: { delay: (i * 400) + 'ms' } } : 'hidden'"
+        >
+          {{ paragraph }}
+        </p>
+
+        <p class="mt-14 text-right font-heading text-3xl italic text-blush/95 glow-sign sm:text-4xl">
+          {{ signedDate() }}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl py-14 sm:py-20">
+    <h2 class="font-heading text-4xl italic text-warmWhite sm:text-6xl text-center">The Question</h2>
+
+    <div class="confession-card mt-10 rounded-3xl p-6 sm:p-10 md:p-12 text-center">
+      <p
+        #questionParagraph
+        class="text-2xl leading-[1.9] text-warmWhite/95 sm:text-3xl font-heading italic"
+        [@fadeSequential]="questionVisible ? { value: 'visible', params: { delay: '0ms' } } : 'hidden'"
+      >
+        So Ms. Pooja Nivrutti Gunjal Would you like to be my girlfriend?
+      </p>
+
+      <div *ngIf="!selectedOption" class="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+        <button
+          (click)="onOptionSelect('Yes')"
+          class="option-button yes-button"
+          [@fadeSequential]="questionVisible ? { value: 'visible', params: { delay: '200ms' } } : 'hidden'"
+        >
+          Yes
+        </button>
+        <button
+          (click)="onOptionSelect('No')"
+          class="option-button no-button"
+          [@fadeSequential]="questionVisible ? { value: 'visible', params: { delay: '400ms' } } : 'hidden'"
+        >
+          No
+        </button>
+        <button
+          (click)="onOptionSelect('Already have a boyfriend')"
+          class="option-button maybe-button"
+          [@fadeSequential]="questionVisible ? { value: 'visible', params: { delay: '600ms' } } : 'hidden'"
+        >
+          Already have a boyfriend
+        </button>
+      </div>
+
+      <div *ngIf="selectedOption" class="mt-8">
+        <p class="text-lg text-warmWhite/90 mb-4">
+          {{ getResponseMessage() }}
+        </p>
+        <p class="text-base text-mutedRose mb-6">
+          Please send me a message on WhatsApp to confirm.
+        </p>
+        <a
+          [href]="getWhatsAppLink()"
+          target="_blank"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-medium transition-colors duration-200"
+        >
+          <span>📱</span>
+          Message on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pb-8 pt-6 text-center text-sm text-mutedRose sm:text-base">
+    <p class="inline-flex items-center gap-2">
+      This page will disappear Monday night.
+      <span class="heart">♥</span>
+    </p>
+  </footer>
+</main>
+
+<div *ngIf="pageExpired" class="min-h-screen flex items-center justify-center px-5 text-center">
+  <div class="max-w-md">
+    <h1 class="text-4xl font-heading italic text-warmWhite mb-4">Time's Up! ⏰</h1>
+    <p class="text-lg text-mutedRose">
+      This romantic confession has vanished into the night, just like it was meant to. 🌙✨
+    </p>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/thombare-confesses",
+  "framework": "angular",
+  "installCommand": "npm install"
+}

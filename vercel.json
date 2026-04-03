@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/thombare-confesses",
+  "outputDirectory": "dist/thombare-confesses/browser",
   "framework": "angular",
   "installCommand": "npm install"
 }

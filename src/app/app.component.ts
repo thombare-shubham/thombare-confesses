@@ -145,8 +145,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         "I'm writing this because I'd rather say it clearly, once, and know where I stand — than keep carrying it quietly and wonder.",
         "I'm not rich. I don't have a car or bike yet. I'm a normal person working hard every day toward something bigger. But I'm someone who means exactly what he says. Someone who notices things. Someone who has been paying attention to you since October — not because someone told him to, but because something in him just did.",
         "I want you to know that I’m rooting for you—not as a distraction, but as someone genuinely in your corner. Your goals and your growth matter most, and I’m happiest seeing you thrive and focused on the life you’re building. Even from a distance, I’m cheering for your success simply because of who you are, with no expectations in return.",
-        "I hate lies. I've noticed a few things I chose to stay quiet about. I'm still choosing to stay quiet about them here — because this isn't about that. This is about what I feel, stated clearly, with nothing hidden.",
-        "You are the first person after seeing whom I wish to be better. The first person who made me feel like the work is worth it. If that means something to you — say so. If it doesn't — say that too.",
+        "I hate lies. I've noticed a few things but I chose to stay quiet about it. I'm still choosing to stay quiet about them here — because this isn't about that. This is about what I feel, stated clearly, with nothing hidden.",
+        "You are the first person after seeing whom I wish to be better. The first person who made me feel like maybe it's worth it. If that means something to you — say so. If it doesn't — say that too.",
         'Either answer is better than silence.'
     ];
 

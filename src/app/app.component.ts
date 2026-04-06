@@ -308,22 +308,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         return `This page disappears in: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
     }
 
-private getNextSundayAtNight(from: Date): Date {
-    const sunday = new Date(from);
-    sunday.setHours(23, 59, 0, 0);
-    const day = from.getDay();
-    const sundayIndex = 0;
-    const daysUntilSunday = (sundayIndex - day + 7) % 7;
-
-    sunday.setDate(from.getDate() + daysUntilSunday);
-
-    if (daysUntilSunday === 0 && from.getTime() > sunday.getTime()) {
-      sunday.setDate(sunday.getDate() + 7);
+    private getNextSundayAtNight(from: Date): Date {
+        // Expire on April 5, 2026 at 23:59
+        return new Date('2026-04-05T23:59:00');
     }
-
-    return sunday;
-    }
-
     private createParticles(count: number): FloatingParticle[] {
         return Array.from({ length: count }).map(() => ({
             left: Math.random() * 100,
